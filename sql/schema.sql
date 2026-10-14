@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS booking_tenants (
   theme_html text,
   theme_css text,
   theme_js text,
+  theme_zip_name varchar(180),
+  theme_draft_html text,
+  theme_draft_css text,
+  theme_draft_js text,
+  theme_draft_zip_name varchar(180),
   theme_preset varchar(16) NOT NULL DEFAULT 'classic' CHECK(theme_preset IN ('classic','minimal','bold')),
   published boolean NOT NULL DEFAULT false,
   created_at timestamptz NOT NULL DEFAULT now()

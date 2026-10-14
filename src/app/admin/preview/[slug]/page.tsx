@@ -10,5 +10,5 @@ export default async function PrivatePreview({params}:{params:Promise<{slug:stri
  const tenant=await tenantBySlug(slug);
  if(!tenant)notFound();
  const services=await tenantServices(tenant.id);
- return <BookingPage business={asPublic(tenant)} services={services} demo/>;
+ return <BookingPage business={{...asPublic(tenant),customTheme:Boolean(tenant.theme_draft_html??tenant.theme_html)}} services={services} demo/>;
 }
