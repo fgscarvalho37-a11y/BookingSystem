@@ -20,6 +20,13 @@ assert(license.includes('cache:\'no-store\''), 'License checks must not be cache
 const booking=read('src/lib/booking.ts');
 assert(booking.includes('pg_advisory_xact_lock'), 'Missing concurrency lock');
 assert(booking.includes('getAccess(tenant)'), 'Reservation endpoint must enforce Orbitta subscription');
+for (const [file,fragment] of [
+ ['src/app/api/admin/tenants/[slug]/theme/route.ts', 'WHERE slug=$1'],
+ ['src/app/api/admin/tenants/[slug]/theme/route.ts', 'theme_draft_html'],
+ ['src/app/api/admin/tenants/[slug]/theme/preview/route.ts', 'theme_draft_html'],
+ ['src/components/AdminPanel.tsx', 'Publicar este ZIP'],
+]) assert(read(file).includes(fragment), 'Missing per-business ZIP flow: '+file);
 const schema=read('sql/schema.sql');
+assert(schema.includes('theme_draft_html'), 'Missing ZIP draft fields');
 assert(schema.includes('orbitta_product_id'), 'Tenant must map to an Orbitta contract');
 console.log('OK: BookingSystem is standalone, with protected tenant and billing boundaries.');

@@ -68,3 +68,15 @@ O projeto Vercel novo e o build foram criados, mas um banco independente precisa
 Cada empresa tem um `theme_preset` independente: `classic` (Atelier), `minimal` e `bold` (Vibrant). Pelo `/admin` você pode mudar o tema, cor, nome, frase, texto, foto hero, horário, timezone e serviços. Há uma prévia privada em `/admin/preview/{slug}` — não publica nem cria reserva real. Um ZIP (`index.html`, `style.css`, `app.js`, `assets/*`) substitui completamente o layout do cliente, isolado do SaaS e sem acesso ao banco. O exemplo está em `public/templates/sample-studio.zip`. Para abrir o modal real de reservas no ZIP, chame `window.OrbittaBooking.open()` no clique do botão. O backend continua controlando preços, horários, contratos e conflitos de reservas.
 
 Importante: o frontend não é um construtor de projetos Next.js; ZIP deve conter HTML/CSS/JS estáticos. Não suba código executável de servidor, tokens ou segredos. O banco precisa ser migrado antes de publicar sites de clientes.
+
+## ZIP exclusivo por cliente — fluxo correto
+
+1. Abra `/admin` e selecione o estabelecimento pelo nome/slug.
+2. Na caixa **Site personalizado por ZIP**, carregue o ZIP específico daquele cliente. O upload salva **rascunho** e nunca muda o site publicado antes de sua aprovação.
+3. Abra `/admin/preview/{slug}` para conferir o ZIP com o modal de reserva (a prévia não grava agendamentos).
+4. Clique **Publicar este ZIP**. Apenas `/s/{slug}` dessa empresa passa a exibir o novo design. As outras empresas e todos os agendamentos ficam inalterados.
+5. Para atualizar o design, carregue outro ZIP e publique novamente. É possível descartar um rascunho, ou restaurar somente a aparência padrão da empresa.
+
+ZIPs estáticos até 4 MB: `index.html` (raiz ou pasta única de exportação), CSS, JS, imagens e fontes locais em subpastas. A importação tenta incorporar arquivos locais para funcionar dentro de iframe isolado. Conteúdo que exige backend próprio, scripts CDN ou chamadas externas deve ser exportado como site estático e adaptado à interface de agendamentos; o navegador bloqueia scripts de origem externa por segurança. No botão de agendar, use `window.OrbittaBooking.open()`.
+
+**Banco:** `sql/schema.sql` inclui as colunas de ZIP publicado e de rascunho. Um PostgreSQL exclusivo continua obrigatório para reservas reais. Não reutilize o banco da Orbitta.
