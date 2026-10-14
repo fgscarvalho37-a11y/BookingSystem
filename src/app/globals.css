@@ -37,3 +37,15 @@
 .admin .theme-template-link{display:inline-flex;align-items:center;gap:8px;margin:12px 0}
 @media(max-width:650px){.admin .design-options{grid-template-columns:1fr}}
 @media(max-width:850px){.site-nav nav{display:none}.hero{grid-template-columns:1fr}.hero-body{padding:75px 7vw}.hero-visual{min-height:360px}.hero-abstract{min-height:360px}.circle{top:-50px}.circle-two{top:25px}.hero-monogram{font-size:240px;top:5%}.hero-fine{padding-top:35px}.value-row,.service-grid{grid-template-columns:1fr}.value-row{gap:25px}.services-section{padding:75px 7vw}.section-title{align-items:flex-start;flex-direction:column}.public-footer{gap:20px;flex-wrap:wrap}.admin-layout{grid-template-columns:1fr}.admin .admin-grid{grid-template-columns:1fr}}@media(max-width:520px){.public-top>span:last-child{display:none}.nav-book{padding:11px;font-size:11px}.hero h1{font-size:53px}.hero-fine{display:block;line-height:2.2}.hero-stamp{font-size:15px;right:15px;bottom:15px}.booking-dialog{padding:23px 19px}.dialog-header h2{font-size:29px}.time-grid{grid-template-columns:repeat(2,1fr)}.demo-pill{left:10px;bottom:10px}.admin h1{font-size:31px}}
+
+.admin .zip-manager{border-color:#92744e;background:#1c2a30}
+.admin .zip-manager h2{display:flex;gap:12px;align-items:center;margin-bottom:7px}
+.admin .zip-status{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+.admin .zip-status>span{background:#102024;border:1px solid #35514e;border-radius:12px;padding:15px;min-width:0}
+.admin .zip-status strong{font-size:12px;color:#f1e6d1;display:block}
+.admin .zip-status small{overflow-wrap:anywhere}
+.admin .zip-manager code{background:#17292f;padding:2px 4px;border-radius:4px;color:#cfeac8}
+.admin .zip-actions{margin:15px 0;gap:12px}
+.admin .zip-actions a{font-size:12px}
+.admin .zip-reset{margin:15px 0}
+@media(max-width:650px){.admin .zip-status{grid-template-columns:1fr}}
