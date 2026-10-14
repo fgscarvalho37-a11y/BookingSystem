@@ -51,3 +51,14 @@ Abra `examples/preview-corrigida.html` e use o botão `OPEN BUSINESS DASHBOARD`.
 O código inclui um workflow `.github/workflows/ci.yml` que testa a separação arquitetural, roda o typecheck e o build do Next.js após subir para o GitHub.
 
 **Estado atual:** código preparado para importação. Não afirmar que está online ou que o checkout está liberado antes de verificar o deploy, o banco e as integrações.
+
+## Deploy e verificação operacional (Vercel + PostgreSQL independente)
+
+1. Configure `DATABASE_URL`, `ADMIN_PASSWORD` (12+ caracteres aleatórios) e `SESSION_SECRET` (32+ caracteres) como variáveis **privadas** de produção no projeto Vercel `bookingsystem`.
+2. Execute `npm run db:migrate` **uma vez por alteração de esquema**, conectado somente ao banco do BookingSystem. O script aplica `sql/schema.sql`. Nunca execute contra o banco da Orbitta.
+3. Faça novo deploy do BookingSystem e abra `/api/health`: o diagnóstico deve informar `status: ready` e `database: connected`.
+4. Entre em `/admin`, crie um estabelecimento teste, cadastre serviço, conceda `trial_until` por até 14 dias e marque como publicado.
+5. Teste `/s/{slug}`, verifique disponibilidade, faça uma reserva e confirme que aparece no painel. Depois tente reservar o mesmo horário outra vez (deve responder conflito).
+6. A integração com assinaturas só é ativada após disponibilizar a ponte privada na Orbitta. Não envie chaves ao navegador.
+
+O projeto Vercel novo e o build foram criados, mas um banco independente precisa ser provisionado para validar reservas reais. Para produção, é necessário revisar controle de acesso por cliente, limites de requisições e política de dados pessoais.

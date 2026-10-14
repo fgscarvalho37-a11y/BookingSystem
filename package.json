@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "verify:architecture": "node scripts/verify-architecture.mjs"
+    "verify:architecture": "node scripts/verify-architecture.mjs",
+    "db:migrate": "node scripts/db-migrate.mjs"
   },
   "dependencies": {
     "next": "16.3.4",
