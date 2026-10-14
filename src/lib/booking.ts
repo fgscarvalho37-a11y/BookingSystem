@@ -4,7 +4,7 @@ import { getAccess } from './license';
 import type { Tenant, Service, Appointment, Slot } from './types';
 
 export class BookingError extends Error { constructor(message:string,public status:number=400){super(message);} }
-export function asPublic(tenant:Tenant){return {slug:tenant.slug,name:tenant.name,tagline:tenant.tagline,description:tenant.description,accent:tenant.accent,hero_image:tenant.hero_image,timezone:tenant.timezone,opens_at:tenant.opens_at,closes_at:tenant.closes_at,weekdays:tenant.weekdays,customTheme:!!tenant.theme_html};}
+export function asPublic(tenant:Tenant){return {slug:tenant.slug,name:tenant.name,tagline:tenant.tagline,description:tenant.description,accent:tenant.accent,hero_image:tenant.hero_image,timezone:tenant.timezone,opens_at:tenant.opens_at,closes_at:tenant.closes_at,weekdays:tenant.weekdays,customTheme:!!tenant.theme_html,theme_preset:tenant.theme_preset||'classic'};}
 export async function tenantBySlug(slug:string):Promise<Tenant|null>{if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))return null;return (await sql<Tenant>('SELECT * FROM booking_tenants WHERE slug=$1',[slug]))[0]||null;}
 export async function tenantServices(id:string):Promise<Service[]>{return sql<Service>('SELECT * FROM booking_services WHERE tenant_id=$1 AND enabled=true ORDER BY name',[id]);}
 export async function activeTenant(slug:string){

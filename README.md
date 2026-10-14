@@ -62,3 +62,9 @@ O código inclui um workflow `.github/workflows/ci.yml` que testa a separação 
 6. A integração com assinaturas só é ativada após disponibilizar a ponte privada na Orbitta. Não envie chaves ao navegador.
 
 O projeto Vercel novo e o build foram criados, mas um banco independente precisa ser provisionado para validar reservas reais. Para produção, é necessário revisar controle de acesso por cliente, limites de requisições e política de dados pessoais.
+
+## Personalização por estabelecimento
+
+Cada empresa tem um `theme_preset` independente: `classic` (Atelier), `minimal` e `bold` (Vibrant). Pelo `/admin` você pode mudar o tema, cor, nome, frase, texto, foto hero, horário, timezone e serviços. Há uma prévia privada em `/admin/preview/{slug}` — não publica nem cria reserva real. Um ZIP (`index.html`, `style.css`, `app.js`, `assets/*`) substitui completamente o layout do cliente, isolado do SaaS e sem acesso ao banco. O exemplo está em `public/templates/sample-studio.zip`. Para abrir o modal real de reservas no ZIP, chame `window.OrbittaBooking.open()` no clique do botão. O backend continua controlando preços, horários, contratos e conflitos de reservas.
+
+Importante: o frontend não é um construtor de projetos Next.js; ZIP deve conter HTML/CSS/JS estáticos. Não suba código executável de servidor, tokens ou segredos. O banco precisa ser migrado antes de publicar sites de clientes.
