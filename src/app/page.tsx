@@ -1,0 +1,5 @@
+import BookingPage from '@/components/BookingPage';
+import type { PublicTenant,Service } from '@/lib/types';
+const demo:PublicTenant={slug:'demo',name:'THE ATELIER',tagline:'Good things take time. Make yours count.',description:'An elevated way to take a moment for yourself. Expert services, unforgettable details, and space to feel your best.',accent:'#c99f6c',hero_image:'',timezone:'America/New_York',opens_at:'09:00',closes_at:'18:00',weekdays:[1,2,3,4,5,6],customTheme:false};
+const services:Service[]=[{id:'a',tenant_id:'demo',name:'The Signature Cut',description:'Precision meets personal style.',price_cents:4500,duration_min:45,enabled:true},{id:'b',tenant_id:'demo',name:'Styling & Finish',description:'Effortlessly polished, unmistakably you.',price_cents:6500,duration_min:60,enabled:true},{id:'c',tenant_id:'demo',name:'Complete Experience',description:'A little extra time, a lot more care.',price_cents:9500,duration_min:90,enabled:true}];
+export default function Home(){return <BookingPage business={demo} services={services} demo/>;}
